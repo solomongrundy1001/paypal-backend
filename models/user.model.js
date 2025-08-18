@@ -18,8 +18,8 @@ const UserSchema = new schema({
         type : String,
         default : "user"
     }
-
-})
+    
+}, { timestamps: true })
 
 
 const UserModel = mongoose.model( "users" , UserSchema)

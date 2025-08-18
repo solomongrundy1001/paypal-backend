@@ -5,6 +5,7 @@ const bodyParser = require("body-parser")
 
 const connectDB = require('./db')
 const routes = require('./routes/admin.routes')
+const userRoute = require('./routes/user.routes')
 
 const PORT = process.env.PORT || 8080
 
@@ -19,21 +20,25 @@ app.use(cors({
 
 // routes
 app.use("/api/superuser", routes)
+app.use("/api", userRoute)
 
 app.get("/", (req , res)=>{
-    res.send("this is working")
+  res.send("this is working")
 })
 
 app.use((error, req, res, next) => {
-  const path = req.path;
+  const path = req.path
+  console.log(path , error.message )
+
   const status = error.status || 500; 
+  const message =`An error occurred: ${error.message}` || `Unexpected server error: ${error.message}`;
 
-  const message =
-    status >= 500
-      ? `Unexpected server error: ${error.message}`
-      : `An error occurred: ${error.message}`;
-
-  return res.status(status).json({ path, message });
+  res.status(status).json({ 
+    path, 
+    message,
+    status
+  });
+  
 });
 
 app.listen(PORT, () =>{

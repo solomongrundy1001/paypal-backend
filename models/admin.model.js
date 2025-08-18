@@ -18,7 +18,7 @@ const AdminSchema = new schema({
         default : "admin"
     }
 
-})
+}, { timestamps: true })
 
 AdminSchema.pre('save', async function(next){
     if (!this.isModified('password')) return next();
