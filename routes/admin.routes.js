@@ -7,6 +7,8 @@ const routes = express.Router()
 const upload = multer({ dest: "uploads/" });
 
 routes.post("/create-user", upload.single('avatar'), validateAdminToken, adminController.CreateUser)
+routes.delete("/:userId/delete-user", validateAdminToken, adminController.DeleteUser)
+routes.delete("/:cardId/delete-card", validateAdminToken, adminController.DeleteCard)
 routes.post("/auth/login", adminController.Login)
 
 

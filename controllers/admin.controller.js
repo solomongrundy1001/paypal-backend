@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user.model");
 require("dotenv").config()
 const cloudinary = require("../integration/cloudinary")
-const fs = require("fs")
+const fs = require("fs");
+const CardModel = require("../models/card.model");
 
 const Login = async(req, res)=>{
     const {email, password} = req.body;
@@ -115,7 +116,83 @@ const CreateUser = async(req, res)=>{
 
 }
 
+const DeleteUser = async(req, res) =>{
+    const userId = req.params.userId;
+    if(!userId){
+        return res.status(404).json({
+            message : "User ID missing",
+            success : false,
+            data : null
+        })
+    }
+    try{
+        const user = await UserModel.findOne({_id : userId})
+        if(!user){
+            return res.status(404).json({
+                message : "User not found",
+                success : false,
+                data : null
+            })
+        }
+        await user.deleteOne();
+
+        return res.status(200).json({
+            message : "User successfully deleted",
+            success : true,
+            data : null
+        });
+
+    }catch(error){
+        console.log(error.message)
+        return res.status(500).json({
+            message : "Server error, cannot delete user at this time",
+            success : false,
+            data : null
+        })
+    }
+
+}
+
+const DeleteCard = async(req, res)=>{
+    const cardId = req.params.cardId
+    if(!cardId){
+        return res.status(404).json({
+            message : "Card ID missing",
+            success : false,
+            data : null
+        })
+    }
+    try{
+        const card = await CardModel.findOne({_id : cardId});
+        if(!card){
+            return res.status(404).json({
+                message : "card with ID not found",
+                success : false,
+                data : null
+            })
+        }
+
+        await card.deleteOne()
+        return res.status(200).json({
+            message : "Successfully deleted card details",
+            success : true,
+            data : null
+        })
+    }catch(error){
+        console.log(error.message)
+
+        return res.status(500).json({
+            message : "Server error, unable to delete card details at this time",
+            success : false,
+            data : null
+        })
+    
+    }
+}
+
 module.exports = {
     Login,
-    CreateUser
+    CreateUser,
+    DeleteUser,
+    DeleteCard
 }
