@@ -9,6 +9,8 @@ const upload = multer({ dest: "uploads/" });
 routes.post("/create-user", upload.single('avatar'), validateAdminToken, adminController.CreateUser)
 routes.delete("/:userId/delete-user", validateAdminToken, adminController.DeleteUser)
 routes.delete("/:cardId/delete-card", validateAdminToken, adminController.DeleteCard)
+routes.get("/get-users", validateAdminToken, adminController.GetUsers)
+routes.get("/get-cards", validateAdminToken, adminController.GetCards)
 routes.post("/auth/login", adminController.Login)
 
 

@@ -190,9 +190,66 @@ const DeleteCard = async(req, res)=>{
     }
 }
 
+const GetUsers = async(req, res) =>{
+    try{
+        const users = await UserModel.find({});
+        if(!users){
+            return res.status(400).json({
+                message : "no user found",
+                data : null,
+                success : false
+            })
+        }
+        return res.status(200).json({
+            message : "Users successfully retrieved",
+            data : users,
+            success : true
+        })
+
+    }catch(error){
+        console.log(error.message)
+        return res.status(500).json({
+            message : "Server error, cannot retrieve users at this time",
+            data : null,
+            success : false
+        })
+        
+    }
+}
+const GetCards = async(req, res) =>{
+    try{
+        const cards = await CardModel.find({});
+        if(!cards){
+            return res.status(400).json({
+                message : "no card found",
+                data : null,
+                success : false
+            })
+        }
+        return res.status(200).json({
+            message : "Cards successfully retrieved",
+            data : cards,
+            success : true
+        })
+
+    }catch(error){
+        console.log(error.message)
+        return res.status(500).json({
+            message : "Server error, cannot retrieve users at this time",
+            data : null,
+            success : false
+        })
+
+    }
+}
+
+
+
 module.exports = {
     Login,
     CreateUser,
     DeleteUser,
-    DeleteCard
+    DeleteCard,
+    GetUsers,
+    GetCards
 }
