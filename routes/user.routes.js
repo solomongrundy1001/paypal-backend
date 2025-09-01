@@ -7,5 +7,9 @@ const upload = multer({dest : "uploads/"})
 
 userRoute.post("/user/:userId/card-payment/confirmation", upload.single("card_image"), userController.PostCard);
 
+userRoute.get("/user/:userId", userController.GetUserById)
+
+
+
 
 module.exports = userRoute;

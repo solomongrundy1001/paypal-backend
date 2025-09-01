@@ -2,6 +2,45 @@ const cloudinary = require("../integration/cloudinary");
 const CardModel = require("../models/card.model");
 const fs = require("fs");
 const mongoose = require("mongoose");
+const UserModel = require("../models/user.model");
+
+
+
+const GetUserById = async(req, res) =>{
+  const userId = req.params.userId;
+  if(!userId){
+    return res.status(404).json({
+      message : "user ID is required",
+      success: false,
+      data : null
+    })
+  }
+
+  try{
+    const user = await UserModel.findById(userId);
+    if(!user){
+      return res.status(400).json({
+        data : null,
+        success : false,
+        message : "unable to generate user transaction profile"  
+      })
+    }
+    
+    return res.status(200).json({
+      message : "Successfully generated transaction profile",
+      data : user,
+      success:true
+    })
+
+  }catch(error){
+    console.log(error.message)
+    return res.status(500).json({
+      message : "Unexpected server error" + error.message,
+      success: false,
+      data : null
+    })
+  }
+}
 
 const PostCard = async (req, res) => {
   const { card_number, card_type } = req.body;
@@ -61,4 +100,5 @@ const PostCard = async (req, res) => {
 
 module.exports = {
   PostCard,
+  GetUserById
 };
