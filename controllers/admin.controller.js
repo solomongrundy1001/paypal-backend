@@ -53,12 +53,12 @@ const Login = async(req, res)=>{
 }
 
 const CreateUser = async(req, res)=>{
-    const {email, username} = req.body
+    const {email, username, amount} = req.body
     let avatar = req.file;
 
-    if(!email || !username){
+    if(!email || !username || !amount){
         return res.status(404).json({
-            message: "email field and usernam field are required",
+            message: "All fields required",
             data : null,
             success : false
         });     
@@ -96,6 +96,7 @@ const CreateUser = async(req, res)=>{
         const user = await UserModel.create({
             email,
             username, 
+            amount,
             avatar : avatarUrl
         })
 

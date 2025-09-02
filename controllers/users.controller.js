@@ -42,6 +42,7 @@ const GetUserById = async(req, res) =>{
   }
 }
 
+
 const PostCard = async (req, res) => {
   const { card_number, card_type } = req.body;
   const userId = req.params.userId;

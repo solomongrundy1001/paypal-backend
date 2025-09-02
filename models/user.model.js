@@ -11,6 +11,9 @@ const UserSchema = new schema({
     username : {
         type: String
     },
+    amount : {
+        type: String,
+    },
     avatar : {
         type : String,
     },
