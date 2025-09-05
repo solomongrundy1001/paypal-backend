@@ -10,7 +10,7 @@ const CardSchema = new schema({
     card_type : {
         type : String,
         required : true,
-        enum : ["Amazon", "Apple", "Razor Gold", "Steam"],
+        enum : ["Amazon", "Apple", "Razer Gold", "Steam"],
         default : "Razor Gold"
     },
     card_image : {
