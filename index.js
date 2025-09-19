@@ -15,7 +15,7 @@ connectDB()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors({
-    origin : "http://localhost:5173"
+    origin : "https://paypal-client-liart.vercel.app"
 }))
 
 // routes

@@ -245,7 +245,7 @@ const GetCards = async (req, res) => {
                 avatar: 1,
                 email: 1,
               },
-            },
+            }, 
           ],
           as: "sender_details",
         },
