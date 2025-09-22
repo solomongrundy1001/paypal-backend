@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended:true}))
 console.log(process.env.NODE_ENV, "line 18")
 app.use(cors({
     origin : process.env.NODE_ENV === "production"?
-      "https://paypal-client-liart.vercel.app" : "http://localhost:5173/"
+      "https://paypal-client-liart.vercel.app" : "http://localhost:5173"
 }))
 
 // routes
