@@ -12,10 +12,12 @@ const PORT = process.env.PORT || 8080
 const app = express()
 connectDB()
 // middlewares
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors({
-    origin : "https://paypal-client-liart.vercel.app"
+    origin : process.env.NODE_ENV === "production"?
+      "https://paypal-client-liart.vercel.app" : "http://localhost:5173/"
 }))
 
 // routes
