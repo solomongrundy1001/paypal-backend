@@ -15,6 +15,7 @@ connectDB()
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+console.log(process.env.NODE_ENV, "line 18")
 app.use(cors({
     origin : process.env.NODE_ENV === "production"?
       "https://paypal-client-liart.vercel.app" : "http://localhost:5173/"
@@ -44,6 +45,7 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(PORT, () =>{
-    console.log("server is running on port: " + PORT)
+  console.log(process.env.NODE_ENV, "line 47")
+  console.log("server is running on port: " + PORT)
 })
 
