@@ -8,6 +8,14 @@ const UserSchema = new schema({
         required : true,
         unique : true
     },
+    firstname : {
+        type : String,
+        required : true,
+    },
+    lastname : {
+        type : String,
+        required : true,
+    },
     username : {
         type: String
     },
