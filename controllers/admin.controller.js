@@ -244,6 +244,8 @@ const GetCards = async (req, res) => {
             {
               $project: {
                 username: 1,
+                firstname: 1,
+                lastname: 1,
                 avatar: 1,
                 email: 1,
               },
